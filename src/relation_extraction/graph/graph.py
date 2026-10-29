@@ -1,3 +1,4 @@
+import networkx as nx
 from RelationExtraction.src.relation_extraction.graph.node import Node
 from RelationExtraction.src.relation_extraction.graph.edge import Edge
 from RelationExtraction.src.relation_extraction.models.token import Token
@@ -37,3 +38,18 @@ class DependencyGraph:
             if edge.source.token.index == token_index:
                 return edge.target
         return None
+
+    def shortest_path(self, entity1_index: int, entity2_index: int) -> list[Node]:
+        graph = nx.Graph()
+
+        graph.add_nodes_from(self.nodes.keys())
+
+        for edge in self.edges:
+            source = edge.source.token.index
+            target = edge.target.token.index
+
+            graph.add_edge(source, target)
+
+        path = nx.shortest_path(graph, source=entity1_index, target=entity2_index)
+
+        return [self.nodes[token_index] for token_index in path]
