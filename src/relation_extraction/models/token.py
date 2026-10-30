@@ -4,7 +4,8 @@ from dataclasses import dataclass
 @dataclass
 class Token:
     text: str
-    index: int
+    token_index: int
+    sentence_index: int
     lemma: str | None = None
     pos: str | None = None
     tag: str | None = None

@@ -12,7 +12,8 @@ class Parser:
         tokens = [
             Token(
                 text=token.text,
-                index=token.i,
+                token_index=token.i,
+                sentence_index=token.idx,
                 lemma=token.lemma_,
                 pos=token.pos_,
                 tag=token.tag_,
